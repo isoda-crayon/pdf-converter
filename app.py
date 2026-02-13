@@ -14,7 +14,92 @@ st.set_page_config(
     layout="centered",
 )
 
-# ===== マスキングテープ風カスタムCSS =====
+
+# =============================================================
+#  パスワード認証
+# =============================================================
+
+def check_password():
+    """パスワード認証。正しければTrueを返す。"""
+
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+
+    if st.session_state.authenticated:
+        return True
+
+    # ログイン画面のスタイル
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap');
+    .stApp {
+        background-color: #faf6ef !important;
+    }
+    .login-box {
+        background: linear-gradient(135deg, #fff5f5 0%, #fff0f5 50%, #f5f0ff 100%);
+        border-radius: 16px;
+        padding: 40px 32px;
+        max-width: 400px;
+        margin: 60px auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        text-align: center;
+        border-top: 6px solid transparent;
+        border-image: linear-gradient(90deg,
+            #ff6b6b, #ffa36b, #ffd93d,
+            #6bcb77, #4d96ff, #9b72cf, #ff6b9d) 1;
+    }
+    .login-box h2 {
+        font-family: 'Zen Maru Gothic', sans-serif;
+        font-weight: 900;
+        color: #5a4040;
+        margin-bottom: 8px;
+    }
+    .login-box p {
+        font-family: 'Zen Maru Gothic', sans-serif;
+        color: #9a7a7a;
+        font-size: 0.9em;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="login-box">
+        <h2>🌈 にじいろくれよん</h2>
+        <p>PDF → PNG 変換ツール</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # パスワード取得（Streamlit Secrets → フォールバック）
+    try:
+        correct_password = st.secrets["password"]
+    except Exception:
+        # secrets未設定の場合のデフォルト（ローカル開発用）
+        correct_password = "nijiiro2026"
+
+    password = st.text_input(
+        "🔑 パスワードを入力してください",
+        type="password",
+        placeholder="パスワード",
+    )
+
+    if st.button("ログイン", type="primary", use_container_width=True):
+        if password == correct_password:
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("❌ パスワードが違います")
+
+    return False
+
+
+# --- 認証チェック ---
+if not check_password():
+    st.stop()
+
+
+# =============================================================
+#  マスキングテープ風カスタムCSS（認証後に表示）
+# =============================================================
 st.markdown("""
 <style>
 /* ===== Google Fonts ===== */
@@ -164,7 +249,7 @@ st.markdown("""
         #6bcb77, #4d96ff, #9b72cf, #ff6b9d);
 }
 
-/* ===== Expander（変換結果）===== */
+/* ===== Expander ===== */
 [data-testid="stExpander"] {
     background: #fffdf7 !important;
     border: 1px solid #f0e0d0 !important;
@@ -174,12 +259,6 @@ st.markdown("""
 }
 [data-testid="stExpander"]:nth-child(even) {
     border-left-color: #bae1ff !important;
-}
-
-/* ===== 成功・情報メッセージ ===== */
-[data-testid="stAlert"] {
-    border-radius: 8px !important;
-    font-family: 'Zen Maru Gothic', sans-serif !important;
 }
 
 /* ===== セクションラベル ===== */
@@ -221,6 +300,14 @@ st.markdown("""
     color: #baa;
     font-size: 0.75em;
     font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+/* ===== ログアウトボタン ===== */
+.logout-btn button {
+    background: transparent !important;
+    color: #baa !important;
+    border: 1px solid #dcc !important;
+    font-size: 0.8em !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -372,7 +459,7 @@ def create_zip(results):
 
 
 # ===================================================================
-#  UI
+#  UI（認証済みユーザーのみ表示）
 # ===================================================================
 
 # --- ヘッダー ---
@@ -383,10 +470,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# 虹色テープ
 st.markdown('<div class="tape-strip tape-rainbow"></div>', unsafe_allow_html=True)
 
-# --- サイドバー：読み対応表 ---
+# --- サイドバー ---
 with st.sidebar:
     st.markdown("""
     <div style="text-align:center; padding: 10px 0 5px 0;">
@@ -473,6 +559,14 @@ with st.sidebar:
         if st.button("全てクリア", type="secondary"):
             st.session_state.kana_map = {}
             st.rerun()
+
+    # ログアウト
+    st.markdown('<div class="tape-strip tape-rainbow"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="logout-btn">', unsafe_allow_html=True)
+    if st.button("🚪 ログアウト", use_container_width=True):
+        st.session_state.authenticated = False
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 # --- メインエリア ---
