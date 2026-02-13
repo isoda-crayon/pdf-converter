@@ -26,79 +26,43 @@ def check_password():
     if st.session_state.authenticated:
         return True
 
-    # ログイン画面
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
     .stApp {
-        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%) !important;
+        background: #f8f9fa !important;
     }
-    .stApp::before {
-        content: '';
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background:
-            radial-gradient(ellipse at 20% 50%, rgba(120,119,198,0.15) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(255,107,107,0.08) 0%, transparent 50%),
-            radial-gradient(ellipse at 50% 80%, rgba(72,219,251,0.08) 0%, transparent 50%);
-        pointer-events: none;
-        z-index: 0;
+    .login-wrap {
+        max-width: 360px;
+        margin: 80px auto 0 auto;
+        text-align: center;
     }
-    .login-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 50vh;
-        padding: 40px 20px;
+    .login-mark {
+        font-size: 2.4em;
+        margin-bottom: 12px;
     }
-    .login-logo {
-        font-size: 3em;
-        margin-bottom: 8px;
-    }
-    .login-title {
+    .login-name {
         font-family: 'Noto Sans JP', sans-serif;
-        font-weight: 900;
-        font-size: 1.6em;
-        background: linear-gradient(135deg, #ff6b6b, #ffa36b, #ffd93d, #6bcb77, #4d96ff, #9b72cf);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-weight: 700;
+        font-size: 1.3em;
+        color: #222;
         margin-bottom: 4px;
-        letter-spacing: 0.02em;
     }
-    .login-subtitle {
+    .login-sub {
         font-family: 'Noto Sans JP', sans-serif;
-        font-weight: 300;
-        color: rgba(255,255,255,0.4);
+        font-weight: 400;
         font-size: 0.85em;
-        letter-spacing: 0.15em;
-    }
-    .login-card {
-        background: rgba(255,255,255,0.04);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 20px;
-        padding: 40px 36px;
-        margin-top: 32px;
-        width: 100%;
-        max-width: 380px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    .login-card label {
-        color: rgba(255,255,255,0.5) !important;
-        font-family: 'Noto Sans JP', sans-serif !important;
-        font-size: 0.8em !important;
-        letter-spacing: 0.05em;
+        color: #888;
+        margin-bottom: 28px;
     }
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="login-container">
-        <div class="login-logo">🌈</div>
-        <div class="login-title">にじいろくれよん</div>
-        <div class="login-subtitle">PDF CONVERTER</div>
+    <div class="login-wrap">
+        <div class="login-mark">🌈</div>
+        <div class="login-name">にじいろくれよん</div>
+        <div class="login-sub">PDF → PNG 変換ツール</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -128,309 +92,189 @@ if not check_password():
 
 
 # =============================================================
-#  モダンデザイン CSS
+#  CSS — シンプル・高視認性・アクセシブル
 # =============================================================
 st.markdown("""
 <style>
-/* ===== Fonts ===== */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
 
-/* ===== 全体 ===== */
+/* === 基本 === */
 .stApp {
-    background: #fafbfe !important;
+    background: #f8f9fa !important;
 }
 .stApp, .stApp p, .stApp span, .stApp label, .stApp div {
-    font-family: 'Noto Sans JP', 'Inter', sans-serif !important;
-}
-
-/* ===== ヒーローヘッダー ===== */
-.hero {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    border-radius: 20px;
-    padding: 44px 36px 40px 36px;
-    margin-bottom: 32px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(15,15,26,0.2);
-}
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -30%;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(120,119,198,0.25) 0%, transparent 70%);
-    pointer-events: none;
-}
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: -40%; left: -20%;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(72,219,251,0.15) 0%, transparent 70%);
-    pointer-events: none;
-}
-.hero-rainbow {
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #ffa36b, #ffd93d, #6bcb77, #4d96ff, #9b72cf, #ff6b9d);
-    border-radius: 2px;
-    margin-bottom: 20px;
-    opacity: 0.8;
-}
-.hero-icon {
-    font-size: 2.2em;
-    margin-bottom: 4px;
-}
-.hero h1 {
     font-family: 'Noto Sans JP', sans-serif !important;
-    font-weight: 900 !important;
-    font-size: 1.7em !important;
-    color: #fff !important;
-    margin: 0 0 6px 0 !important;
-    letter-spacing: 0.01em;
-    position: relative;
-    z-index: 1;
-}
-.hero-desc {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
-    color: rgba(255,255,255,0.55);
-    font-size: 0.88em;
-    letter-spacing: 0.04em;
-    position: relative;
-    z-index: 1;
-    line-height: 1.6;
+    color: #333;
 }
 
-/* ===== セクション ===== */
-.section-title {
+/* === ヘッダー === */
+.app-header {
+    background: #fff;
+    border-bottom: 3px solid #333;
+    border-radius: 0;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+}
+.app-header-top {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 28px 0 14px 0;
+    gap: 12px;
+    margin-bottom: 6px;
 }
-.section-title-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.95em;
-    flex-shrink: 0;
+.app-header-top span.icon {
+    font-size: 1.5em;
 }
-.section-title-icon.pink { background: linear-gradient(135deg, #ff6b6b20, #ff6b6b10); }
-.section-title-icon.blue { background: linear-gradient(135deg, #4d96ff20, #4d96ff10); }
-.section-title-icon.green { background: linear-gradient(135deg, #6bcb7720, #6bcb7710); }
-.section-title-text {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    font-size: 0.95em;
-    color: #1a1a2e;
-    letter-spacing: 0.02em;
-}
-.section-title-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, #e0e0e8, transparent);
-}
-
-/* ===== アップロードエリア ===== */
-[data-testid="stFileUploader"] {
-    background: #fff !important;
-    border: 2px dashed #d8dae5 !important;
-    border-radius: 16px !important;
-    padding: 12px !important;
-    transition: all 0.3s ease !important;
-}
-[data-testid="stFileUploader"]:hover {
-    border-color: #9b72cf !important;
-    background: #fafaff !important;
-    box-shadow: 0 4px 20px rgba(155,114,207,0.08) !important;
-}
-
-/* ===== プライマリボタン ===== */
-.stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
-    color: #fff !important;
-    border: none !important;
+.app-header-top h1 {
     font-family: 'Noto Sans JP', sans-serif !important;
     font-weight: 700 !important;
-    font-size: 1.05em !important;
-    padding: 14px 24px !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 15px rgba(15,15,26,0.2) !important;
-    transition: all 0.3s ease !important;
-    letter-spacing: 0.06em;
+    font-size: 1.25em !important;
+    color: #111 !important;
+    margin: 0 !important;
+    line-height: 1.3;
 }
-.stButton > button[kind="primary"]:hover {
-    box-shadow: 0 6px 25px rgba(15,15,26,0.35) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* ===== ダウンロードボタン ===== */
-.stDownloadButton > button {
-    background: linear-gradient(135deg, #6bcb77 0%, #4d96ff 100%) !important;
-    color: #fff !important;
-    border: none !important;
-    font-family: 'Noto Sans JP', sans-serif !important;
-    font-weight: 600 !important;
-    border-radius: 12px !important;
-    padding: 12px 24px !important;
-    box-shadow: 0 4px 15px rgba(77,150,255,0.2) !important;
-    transition: all 0.3s ease !important;
-}
-.stDownloadButton > button:hover {
-    box-shadow: 0 6px 25px rgba(77,150,255,0.35) !important;
-    transform: translateY(-2px) !important;
+.app-header-desc {
+    font-size: 0.88em;
+    color: #666;
+    line-height: 1.5;
 }
 
-/* ===== サイドバー ===== */
-[data-testid="stSidebar"] {
-    background: #fff !important;
-    border-right: 1px solid #f0f0f5 !important;
-}
-
-.sidebar-header {
-    padding: 16px 0 12px 0;
-    border-bottom: 1px solid #f0f0f5;
-    margin-bottom: 16px;
-}
-.sidebar-header-title {
+/* === セクション見出し === */
+.sec {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 700;
-    font-size: 1em;
-    color: #1a1a2e;
+    font-size: 0.92em;
+    color: #111;
+    padding: 10px 0 6px 0;
+    margin-top: 20px;
+    border-bottom: 2px solid #111;
     display: flex;
     align-items: center;
     gap: 8px;
 }
-.sidebar-header-sub {
+
+/* === アップロード === */
+[data-testid="stFileUploader"] {
+    background: #fff !important;
+    border: 2px dashed #bbb !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+}
+[data-testid="stFileUploader"]:hover {
+    border-color: #666 !important;
+}
+
+/* === ボタン共通 === */
+.stButton > button, .stDownloadButton > button {
+    font-family: 'Noto Sans JP', sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    padding: 10px 20px !important;
+    transition: opacity 0.2s !important;
+}
+.stButton > button:hover, .stDownloadButton > button:hover {
+    opacity: 0.85 !important;
+}
+
+/* プライマリ */
+.stButton > button[kind="primary"] {
+    background: #111 !important;
+    color: #fff !important;
+    border: none !important;
+    font-size: 1em !important;
+}
+
+/* ダウンロード */
+.stDownloadButton > button {
+    background: #0d6efd !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* === サイドバー === */
+[data-testid="stSidebar"] {
+    background: #fff !important;
+    border-right: 1px solid #e0e0e0 !important;
+}
+
+.sb-title {
     font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
-    font-size: 0.75em;
-    color: #999;
-    margin-top: 2px;
+    font-weight: 700;
+    font-size: 1em;
+    color: #111;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #111;
+}
+.sb-section {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 600;
+    font-size: 0.82em;
+    color: #666;
+    margin: 18px 0 6px 0;
     letter-spacing: 0.04em;
 }
 
-.sidebar-section {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 600;
-    font-size: 0.78em;
-    color: #aaa;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin: 20px 0 8px 0;
-}
-
-/* ===== 登録済みタグ ===== */
-.kana-tag {
+/* 登録済みタグ */
+.tag {
     display: inline-block;
-    background: #f5f5fa;
-    border: 1px solid #ececf2;
-    border-radius: 8px;
-    padding: 5px 12px;
-    margin: 3px 2px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.82em;
-    font-weight: 500;
-    color: #444;
-    transition: all 0.2s ease;
-}
-.kana-tag:hover {
-    background: #eeeef5;
-    border-color: #d0d0e0;
-}
-.kana-tag .arrow {
-    color: #bbb;
-    margin: 0 4px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin: 2px;
+    font-size: 0.85em;
+    color: #333;
 }
 
-/* ===== Expander（結果）===== */
+/* === Expander === */
 [data-testid="stExpander"] {
     background: #fff !important;
-    border: 1px solid #f0f0f5 !important;
-    border-radius: 12px !important;
-    margin-bottom: 8px !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-    transition: all 0.2s ease !important;
-}
-[data-testid="stExpander"]:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    margin-bottom: 6px !important;
 }
 
-/* ===== アラート ===== */
-[data-testid="stAlert"] {
-    border-radius: 12px !important;
-    font-family: 'Noto Sans JP', sans-serif !important;
-}
-
-/* ===== フッター ===== */
-.app-footer {
-    text-align: center;
-    padding: 32px 0 16px 0;
-}
-.footer-rainbow {
-    height: 2px;
-    background: linear-gradient(90deg, #ff6b6b, #ffa36b, #ffd93d, #6bcb77, #4d96ff, #9b72cf, #ff6b9d);
-    border-radius: 1px;
-    margin-bottom: 16px;
-    opacity: 0.5;
-}
-.footer-text {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
-    font-size: 0.72em;
-    color: #bbb;
-    letter-spacing: 0.08em;
-}
-
-/* ===== 統計カード ===== */
-.stat-row {
+/* === 情報カード === */
+.info-row {
     display: flex;
-    gap: 12px;
-    margin: 16px 0;
+    gap: 10px;
+    margin: 12px 0 16px 0;
 }
-.stat-card {
+.info-card {
     flex: 1;
     background: #fff;
-    border: 1px solid #f0f0f5;
-    border-radius: 12px;
-    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 14px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
-.stat-value {
-    font-family: 'Inter', sans-serif;
+.info-val {
     font-weight: 700;
-    font-size: 1.4em;
-    color: #1a1a2e;
+    font-size: 1.3em;
+    color: #111;
 }
-.stat-label {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 400;
-    font-size: 0.72em;
-    color: #aaa;
+.info-lbl {
+    font-size: 0.75em;
+    color: #888;
     margin-top: 2px;
-    letter-spacing: 0.06em;
 }
 
-/* ===== ログアウト ===== */
-.logout-area {
-    padding-top: 12px;
-    border-top: 1px solid #f0f0f5;
-    margin-top: 20px;
+/* === フッター === */
+.ft {
+    text-align: center;
+    padding: 28px 0 12px 0;
+    font-size: 0.75em;
+    color: #aaa;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 32px;
 }
-.logout-area button {
+
+/* === ログアウト === */
+.lo button {
     background: transparent !important;
-    color: #ccc !important;
-    border: 1px solid #eee !important;
-    font-size: 0.78em !important;
-    border-radius: 8px !important;
-}
-.logout-area button:hover {
-    color: #999 !important;
-    border-color: #ddd !important;
+    color: #aaa !important;
+    border: 1px solid #ddd !important;
+    font-size: 0.8em !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -583,31 +427,33 @@ def create_zip(results):
 #  UI
 # ===================================================================
 
-# --- ヒーローヘッダー ---
+# --- ヘッダー ---
 st.markdown("""
-<div class="hero">
-    <div class="hero-rainbow"></div>
-    <div class="hero-icon">🌈</div>
-    <h1>にじいろくれよん PDF → PNG</h1>
-    <div class="hero-desc">
-        利用料請求書PDFをアップロードすると、ひらがなプレフィックス付きPNG画像に自動変換します
+<div class="app-header">
+    <div class="app-header-top">
+        <span class="icon">🌈</span>
+        <h1>にじいろくれよん PDF → PNG 変換</h1>
+    </div>
+    <div class="app-header-desc">
+        利用料請求書PDFをアップロード → ひらがなプレフィックス付きPNG画像に変換
     </div>
 </div>
 """, unsafe_allow_html=True)
 
 # --- サイドバー ---
 with st.sidebar:
-    st.markdown("""
-    <div class="sidebar-header">
-        <div class="sidebar-header-title">📝 読み対応表</div>
-        <div class="sidebar-header-sub">名前の読みを正しく変換するための設定</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        '<div class="sb-title">📝 読み対応表</div>',
+        unsafe_allow_html=True,
+    )
 
     kana_map = load_kana_map()
 
     # CSV一括登録
-    st.markdown('<div class="sidebar-section">CSV 一括登録</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="sb-section">CSV から一括登録</div>',
+        unsafe_allow_html=True,
+    )
     st.caption("A列：名前、B列：読み（ヘッダー行あり）")
     csv_file = st.file_uploader(
         "CSVファイル", type=["csv"], label_visibility="collapsed"
@@ -616,7 +462,7 @@ with st.sidebar:
         import csv
         content = csv_file.read().decode("utf-8-sig")
         reader = csv.reader(content.splitlines())
-        header = next(reader, None)
+        next(reader, None)
         count = 0
         for row in reader:
             if len(row) >= 2 and row[0].strip() and row[1].strip():
@@ -626,7 +472,10 @@ with st.sidebar:
             st.success(str(count) + " 件登録しました")
 
     # 手動追加
-    st.markdown('<div class="sidebar-section">手動追加</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="sb-section">手動で追加</div>',
+        unsafe_allow_html=True,
+    )
     col1, col2 = st.columns(2)
     with col1:
         new_name = st.text_input("名前", placeholder="植田")
@@ -638,21 +487,17 @@ with st.sidebar:
             st.success(new_name + " → " + new_reading)
             st.rerun()
 
-    # 登録済み一覧
+    # 登録済み
     if kana_map:
         st.markdown(
-            '<div class="sidebar-section">登録済み（'
-            + str(len(kana_map)) + '件）</div>',
+            '<div class="sb-section">登録済み（'
+            + str(len(kana_map)) + ' 件）</div>',
             unsafe_allow_html=True,
         )
         for name, reading in sorted(kana_map.items()):
             col_a, col_b = st.columns([5, 1])
             col_a.markdown(
-                '<div class="kana-tag">'
-                + name
-                + '<span class="arrow">→</span>'
-                + reading
-                + '</div>',
+                '<div class="tag">' + name + ' → ' + reading + '</div>',
                 unsafe_allow_html=True,
             )
             if col_b.button("✕", key="del_" + name):
@@ -664,22 +509,20 @@ with st.sidebar:
             st.rerun()
 
     # ログアウト
-    st.markdown('<div class="logout-area">', unsafe_allow_html=True)
+    st.divider()
+    st.markdown('<div class="lo">', unsafe_allow_html=True)
     if st.button("ログアウト", use_container_width=True):
         st.session_state.authenticated = False
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-# --- メインエリア ---
+# --- メイン ---
 
-st.markdown("""
-<div class="section-title">
-    <div class="section-title-icon pink">📁</div>
-    <div class="section-title-text">PDFをアップロード</div>
-    <div class="section-title-line"></div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="sec">📁 PDFをアップロード</div>',
+    unsafe_allow_html=True,
+)
 
 uploaded_files = st.file_uploader(
     "PDFファイルを選択（複数可）",
@@ -690,19 +533,16 @@ uploaded_files = st.file_uploader(
 
 if uploaded_files:
     file_count = len(uploaded_files)
-    total_size = sum(f.size for f in uploaded_files)
-    size_str = str(round(total_size / 1024)) + " KB"
+    total_kb = sum(f.size for f in uploaded_files) / 1024
 
     st.markdown(
-        '<div class="stat-row">'
-        + '<div class="stat-card">'
-        + '<div class="stat-value">' + str(file_count) + '</div>'
-        + '<div class="stat-label">ファイル数</div>'
-        + '</div>'
-        + '<div class="stat-card">'
-        + '<div class="stat-value">' + size_str + '</div>'
-        + '<div class="stat-label">合計サイズ</div>'
-        + '</div>'
+        '<div class="info-row">'
+        + '<div class="info-card">'
+        + '<div class="info-val">' + str(file_count) + '</div>'
+        + '<div class="info-lbl">ファイル</div></div>'
+        + '<div class="info-card">'
+        + '<div class="info-val">' + str(round(total_kb)) + ' KB</div>'
+        + '<div class="info-lbl">合計サイズ</div></div>'
         + '</div>',
         unsafe_allow_html=True,
     )
@@ -713,19 +553,16 @@ if uploaded_files:
         with st.spinner("変換中..."):
             results = process_pdfs(uploaded_files, kana_map)
 
-        success_count = sum(1 for r in results if r["status"] == "ok")
-        error_count = sum(1 for r in results if r["status"] != "ok")
+        ok = [r for r in results if r["status"] == "ok"]
+        ng = [r for r in results if r["status"] != "ok"]
 
-        if success_count > 0:
-            st.success(str(success_count) + " 枚のPNG画像を生成しました")
+        if ok:
+            st.success(str(len(ok)) + " 枚の画像を生成しました")
 
-            st.markdown("""
-            <div class="section-title">
-                <div class="section-title-icon green">📥</div>
-                <div class="section-title-text">ダウンロード</div>
-                <div class="section-title-line"></div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(
+                '<div class="sec">📥 ダウンロード</div>',
+                unsafe_allow_html=True,
+            )
 
             zip_data = create_zip(results)
             st.download_button(
@@ -736,46 +573,35 @@ if uploaded_files:
                 use_container_width=True,
             )
 
-            st.markdown("""
-            <div class="section-title">
-                <div class="section-title-icon blue">🖼</div>
-                <div class="section-title-text">変換結果</div>
-                <div class="section-title-line"></div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(
+                '<div class="sec">🖼 変換結果</div>',
+                unsafe_allow_html=True,
+            )
 
-            for item in results:
-                if item["status"] == "ok":
-                    with st.expander(item["filename"], expanded=False):
-                        col_info, col_preview = st.columns([1, 1])
-                        with col_info:
-                            st.write("**名前:** " + item["name"])
-                            st.write("**日付:** " + item["date"])
-                            st.write("**金額:** " + item["amount"])
-                        with col_preview:
-                            st.image(
-                                item["png_bytes"],
-                                caption=item["filename"],
-                                width=300,
-                            )
-                        st.download_button(
-                            label="この画像をダウンロード",
-                            data=item["png_bytes"],
-                            file_name=item["filename"],
-                            mime="image/png",
-                            key="dl_" + item["filename"],
-                        )
+            for item in ok:
+                with st.expander(item["filename"]):
+                    c1, c2 = st.columns([1, 1])
+                    with c1:
+                        st.write("**名前:** " + item["name"])
+                        st.write("**日付:** " + item["date"])
+                        st.write("**金額:** " + item["amount"])
+                    with c2:
+                        st.image(item["png_bytes"], width=280)
+                    st.download_button(
+                        label="この画像をダウンロード",
+                        data=item["png_bytes"],
+                        file_name=item["filename"],
+                        mime="image/png",
+                        key="dl_" + item["filename"],
+                    )
 
-        if error_count > 0:
-            st.error(str(error_count) + " 件のエラー")
-            for item in results:
-                if item["status"] != "ok":
-                    st.warning(item["filename"] + ": " + item["status"])
+        if ng:
+            st.error(str(len(ng)) + " 件のエラー")
+            for item in ng:
+                st.warning(item["filename"] + ": " + item["status"])
 
 # --- フッター ---
-st.markdown("""
-<div class="app-footer">
-    <div class="footer-rainbow"></div>
-    <div class="footer-text">にじいろくれよん株式会社 &copy; 2026</div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="ft">にじいろくれよん株式会社 &copy; 2026</div>',
+    unsafe_allow_html=True,
+)
