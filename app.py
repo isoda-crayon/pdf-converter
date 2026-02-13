@@ -9,28 +9,236 @@ import pykakasi
 
 # ===== ページ設定 =====
 st.set_page_config(
-    page_title="PDF → PNG 変換ツール",
-    page_icon="📄",
+    page_title="にじいろくれよん PDF変換",
+    page_icon="🌈",
     layout="centered",
 )
+
+# ===== マスキングテープ風カスタムCSS =====
+st.markdown("""
+<style>
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Kosugi+Maru&display=swap');
+
+/* ===== 全体背景 ===== */
+.stApp {
+    background-color: #faf6ef !important;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(255,182,193,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(135,206,250,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,150,0.08) 0%, transparent 50%);
+}
+
+/* ===== テキスト全般 ===== */
+.stApp, .stApp p, .stApp span, .stApp label, .stApp div {
+    font-family: 'Zen Maru Gothic', 'Kosugi Maru', sans-serif !important;
+}
+
+/* ===== ヘッダーバナー ===== */
+.tape-header {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 30%, #a8edea 60%, #fed6e3 100%);
+    padding: 28px 24px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    border-top: 3px solid rgba(255,255,255,0.6);
+    border-bottom: 3px solid rgba(0,0,0,0.04);
+}
+.tape-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(255,255,255,0.15) 4px,
+        rgba(255,255,255,0.15) 5px
+    );
+    pointer-events: none;
+}
+.tape-header h1 {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 1.8em !important;
+    color: #5a4040 !important;
+    margin: 0 !important;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+}
+.tape-header p {
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    color: #7a5a5a !important;
+    margin: 6px 0 0 0 !important;
+    font-size: 0.9em !important;
+    font-weight: 500;
+}
+
+/* ===== マスキングテープ装飾ストリップ ===== */
+.tape-strip {
+    height: 8px;
+    border-radius: 1px;
+    margin: 16px 0;
+    opacity: 0.7;
+    transform: rotate(-0.3deg);
+}
+.tape-rainbow {
+    background: linear-gradient(90deg,
+        #ff6b6b 0%, #ffa36b 14%, #ffd93d 28%,
+        #6bcb77 42%, #4d96ff 56%, #9b72cf 70%,
+        #ff6b9d 84%, #ff6b6b 100%);
+}
+.tape-pink {
+    background: linear-gradient(90deg, #ffb3ba, #ffdfdf, #ffb3ba);
+    transform: rotate(0.2deg);
+}
+.tape-blue {
+    background: linear-gradient(90deg, #bae1ff, #e8f4ff, #bae1ff);
+    transform: rotate(-0.5deg);
+}
+.tape-green {
+    background: linear-gradient(90deg, #baffc9, #e8ffed, #baffc9);
+    transform: rotate(0.3deg);
+}
+.tape-yellow {
+    background: linear-gradient(90deg, #ffffba, #fffde8, #ffffba);
+    transform: rotate(-0.2deg);
+}
+
+/* ===== アップロードエリア ===== */
+[data-testid="stFileUploader"] {
+    background: #fffdf7 !important;
+    border: 2px dashed #e8c4a0 !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+}
+[data-testid="stFileUploader"]:hover {
+    border-color: #d4a06a !important;
+    background: #fff8ec !important;
+}
+
+/* ===== ボタン ===== */
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a8edea 100%) !important;
+    color: #5a3a3a !important;
+    border: none !important;
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1em !important;
+    padding: 12px 24px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 6px rgba(255,154,158,0.3) !important;
+    transition: all 0.3s ease !important;
+    letter-spacing: 0.05em;
+}
+.stButton > button[kind="primary"]:hover {
+    box-shadow: 0 4px 12px rgba(255,154,158,0.4) !important;
+    transform: translateY(-1px);
+}
+
+/* ダウンロードボタン */
+.stDownloadButton > button {
+    background: linear-gradient(135deg, #a8edea 0%, #bae1ff 100%) !important;
+    color: #3a5a5a !important;
+    border: none !important;
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 6px rgba(168,237,234,0.3) !important;
+}
+
+/* ===== サイドバー ===== */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #fff5f5 0%, #fff0f5 30%, #f5f0ff 60%, #f0f5ff 100%) !important;
+}
+[data-testid="stSidebar"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg,
+        #ff6b6b, #ffa36b, #ffd93d,
+        #6bcb77, #4d96ff, #9b72cf, #ff6b9d);
+}
+
+/* ===== Expander（変換結果）===== */
+[data-testid="stExpander"] {
+    background: #fffdf7 !important;
+    border: 1px solid #f0e0d0 !important;
+    border-radius: 8px !important;
+    border-left: 5px solid #ffb3ba !important;
+    margin-bottom: 8px !important;
+}
+[data-testid="stExpander"]:nth-child(even) {
+    border-left-color: #bae1ff !important;
+}
+
+/* ===== 成功・情報メッセージ ===== */
+[data-testid="stAlert"] {
+    border-radius: 8px !important;
+    font-family: 'Zen Maru Gothic', sans-serif !important;
+}
+
+/* ===== セクションラベル ===== */
+.section-label {
+    display: inline-block;
+    background: linear-gradient(90deg, #ffb3ba, #ffdfdf);
+    padding: 4px 16px;
+    border-radius: 2px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    color: #6a4a4a;
+    font-size: 0.85em;
+    margin: 16px 0 8px 0;
+    transform: rotate(-0.5deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    letter-spacing: 0.05em;
+}
+
+/* ===== 登録済みアイテム ===== */
+.kana-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #ffffba, #fffde8);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin: 3px 4px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 0.85em;
+    color: #6a5a2a;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transform: rotate(-0.3deg);
+}
+
+/* ===== フッター ===== */
+.tape-footer {
+    text-align: center;
+    padding: 20px 0 10px 0;
+    color: #baa;
+    font-size: 0.75em;
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+</style>
+""", unsafe_allow_html=True)
 
 
 # ===== 読み対応表の管理 =====
 
 def load_kana_map():
-    """セッションに保存された読み対応表を返す"""
     if "kana_map" not in st.session_state:
         st.session_state.kana_map = {}
     return st.session_state.kana_map
 
 
 def get_kana_prefix(text, kana_map=None):
-    """名前からひらがなプレフィックスを生成"""
     if not text:
         return ""
     name_clean = text.replace(" ", "").replace("\u3000", "")
 
-    # 1. 対応表から検索
     if kana_map:
         for surname, reading in kana_map.items():
             surname_clean = surname.replace(" ", "").replace("\u3000", "")
@@ -38,7 +246,6 @@ def get_kana_prefix(text, kana_map=None):
                 if reading:
                     return reading[0] + "ー"
 
-    # 2. pykakasi フォールバック
     kks = pykakasi.kakasi()
     first_char = name_clean[0]
     result = kks.convert(first_char)
@@ -119,25 +326,20 @@ def generate_filename(info, fallback_name, page_num, kana_map=None):
 
 
 def process_pdfs(uploaded_files, kana_map):
-    """PDFファイルを処理してPNG画像のリストを返す"""
     results = []
-
     for uploaded_file in uploaded_files:
         try:
             pdf_bytes = uploaded_file.read()
             doc = fitz.open(stream=pdf_bytes, filetype="pdf")
             fallback_name = os.path.splitext(uploaded_file.name)[0]
-
             for page_num, page in enumerate(doc):
                 info = extract_info_from_page(page)
                 filename = generate_filename(
                     info, fallback_name, page_num, kana_map
                 )
-
                 mat = fitz.Matrix(2.0, 2.0)
                 pix = page.get_pixmap(matrix=mat)
                 png_bytes = pix.tobytes("png")
-
                 results.append({
                     "filename": filename,
                     "png_bytes": png_bytes,
@@ -146,7 +348,6 @@ def process_pdfs(uploaded_files, kana_map):
                     "amount": info["amount"],
                     "status": "ok",
                 })
-
             doc.close()
         except Exception as e:
             results.append({
@@ -157,12 +358,10 @@ def process_pdfs(uploaded_files, kana_map):
                 "amount": "",
                 "status": "error: " + str(e),
             })
-
     return results
 
 
 def create_zip(results):
-    """処理結果をZIPにまとめる"""
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
         for item in results:
@@ -172,20 +371,43 @@ def create_zip(results):
     return zip_buffer
 
 
-# ===== UI =====
+# ===================================================================
+#  UI
+# ===================================================================
 
-st.title("📄 利用料請求書 PDF → PNG 変換")
-st.caption("PDFをアップロードすると、ひらがなプレフィックス付きPNG画像に変換します")
+# --- ヘッダー ---
+st.markdown("""
+<div class="tape-header">
+    <h1>🌈 にじいろくれよん PDF → PNG 変換</h1>
+    <p>利用料請求書PDFをアップロードすると、ひらがなプレフィックス付きPNG画像に変換します</p>
+</div>
+""", unsafe_allow_html=True)
 
-# --- サイドバー：読み対応表の管理 ---
+# 虹色テープ
+st.markdown('<div class="tape-strip tape-rainbow"></div>', unsafe_allow_html=True)
+
+# --- サイドバー：読み対応表 ---
 with st.sidebar:
-    st.header("📝 読み対応表")
+    st.markdown("""
+    <div style="text-align:center; padding: 10px 0 5px 0;">
+        <span style="font-size:1.6em;">📝</span>
+        <span style="font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:1.1em; color:#6a4a5a;">
+            読み対応表
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.caption("名前の読みを正しく変換するための対応表です")
+
+    st.markdown('<div class="tape-strip tape-pink"></div>', unsafe_allow_html=True)
 
     kana_map = load_kana_map()
 
     # CSVアップロード
-    st.subheader("CSVから一括登録")
+    st.markdown(
+        '<div class="section-label">📎 CSVから一括登録</div>',
+        unsafe_allow_html=True,
+    )
     st.caption("A列：名前、B列：読み（ヘッダー行あり）")
     csv_file = st.file_uploader(
         "CSVファイル", type=["csv"], label_visibility="collapsed"
@@ -194,7 +416,7 @@ with st.sidebar:
         import csv
         content = csv_file.read().decode("utf-8-sig")
         reader = csv.reader(content.splitlines())
-        header = next(reader, None)  # ヘッダーをスキップ
+        header = next(reader, None)
         count = 0
         for row in reader:
             if len(row) >= 2 and row[0].strip() and row[1].strip():
@@ -204,8 +426,13 @@ with st.sidebar:
             st.success(str(count) + " 件登録しました")
         csv_file = None
 
+    st.markdown('<div class="tape-strip tape-blue"></div>', unsafe_allow_html=True)
+
     # 手動追加
-    st.subheader("手動で追加")
+    st.markdown(
+        '<div class="section-label">✏️ 手動で追加</div>',
+        unsafe_allow_html=True,
+    )
     col1, col2 = st.columns(2)
     with col1:
         new_name = st.text_input("名前", placeholder="植田")
@@ -214,49 +441,78 @@ with st.sidebar:
     if st.button("追加", use_container_width=True):
         if new_name and new_reading:
             st.session_state.kana_map[new_name] = new_reading
-            st.success(new_name + " → " + new_reading + " を追加")
+            st.success(new_name + " → " + new_reading)
             st.rerun()
 
-    # 現在の対応表を表示
+    st.markdown('<div class="tape-strip tape-green"></div>', unsafe_allow_html=True)
+
+    # 登録済み一覧
     if kana_map:
-        st.subheader("登録済み（" + str(len(kana_map)) + " 件）")
+        st.markdown(
+            '<div class="section-label">🏷️ 登録済み（'
+            + str(len(kana_map))
+            + ' 件）</div>',
+            unsafe_allow_html=True,
+        )
         for name, reading in sorted(kana_map.items()):
             col_a, col_b, col_c = st.columns([3, 3, 1])
-            col_a.write(name)
-            col_b.write(reading)
+            col_a.markdown(
+                '<div class="kana-item">' + name + '</div>',
+                unsafe_allow_html=True,
+            )
+            col_b.markdown(
+                '<div class="kana-item">' + reading + '</div>',
+                unsafe_allow_html=True,
+            )
             if col_c.button("✕", key="del_" + name):
                 del st.session_state.kana_map[name]
                 st.rerun()
+
+        st.markdown('<div class="tape-strip tape-yellow"></div>', unsafe_allow_html=True)
 
         if st.button("全てクリア", type="secondary"):
             st.session_state.kana_map = {}
             st.rerun()
 
-# --- メインエリア：PDF処理 ---
+
+# --- メインエリア ---
+
+st.markdown(
+    '<div class="section-label">📁 PDFファイルを選んでね</div>',
+    unsafe_allow_html=True,
+)
 
 uploaded_files = st.file_uploader(
     "PDFファイルを選択（複数可）",
     type=["pdf"],
     accept_multiple_files=True,
+    label_visibility="collapsed",
 )
 
 if uploaded_files:
-    st.info(str(len(uploaded_files)) + " 個のPDFが選択されています")
+    st.info("🌈 " + str(len(uploaded_files)) + " 個のPDFが選択されています")
 
-    if st.button("🔄 変換開始", type="primary", use_container_width=True):
+    st.markdown('<div class="tape-strip tape-pink"></div>', unsafe_allow_html=True)
+
+    if st.button("🎨 変換開始", type="primary", use_container_width=True):
         kana_map = load_kana_map()
 
-        with st.spinner("変換中..."):
+        with st.spinner("🖍️ くれよんで変換中..."):
             results = process_pdfs(uploaded_files, kana_map)
 
-        # 結果表示
         success_count = sum(1 for r in results if r["status"] == "ok")
         error_count = sum(1 for r in results if r["status"] != "ok")
 
         if success_count > 0:
-            st.success(str(success_count) + " 枚のPNG画像を生成しました！")
+            st.success(
+                "🌈 " + str(success_count) + " 枚のPNG画像を生成しました！"
+            )
 
-            # ZIPダウンロードボタン
+            st.markdown(
+                '<div class="tape-strip tape-rainbow"></div>',
+                unsafe_allow_html=True,
+            )
+
             zip_data = create_zip(results)
             st.download_button(
                 label="📥 ZIPでまとめてダウンロード",
@@ -266,8 +522,11 @@ if uploaded_files:
                 use_container_width=True,
             )
 
-            # 個別の結果
-            st.subheader("変換結果")
+            st.markdown(
+                '<div class="section-label">🖼️ 変換結果</div>',
+                unsafe_allow_html=True,
+            )
+
             for item in results:
                 if item["status"] == "ok":
                     with st.expander(
@@ -275,16 +534,15 @@ if uploaded_files:
                     ):
                         col_info, col_preview = st.columns([1, 1])
                         with col_info:
-                            st.write("**名前:** " + item["name"])
-                            st.write("**日付:** " + item["date"])
-                            st.write("**金額:** " + item["amount"])
+                            st.write("**🏷️ 名前:** " + item["name"])
+                            st.write("**📅 日付:** " + item["date"])
+                            st.write("**💰 金額:** " + item["amount"])
                         with col_preview:
                             st.image(
                                 item["png_bytes"],
                                 caption=item["filename"],
                                 width=300,
                             )
-                        # 個別ダウンロード
                         st.download_button(
                             label="この画像をダウンロード",
                             data=item["png_bytes"],
@@ -298,3 +556,13 @@ if uploaded_files:
             for item in results:
                 if item["status"] != "ok":
                     st.warning(item["filename"] + ": " + item["status"])
+
+# --- フッター ---
+st.markdown('<div class="tape-strip tape-rainbow"></div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="tape-footer">'
+    + "🌈 にじいろくれよん株式会社 &copy; 2026 "
+    + "| つくった人のぬくもりが伝わるツール"
+    + "</div>",
+    unsafe_allow_html=True,
+)
