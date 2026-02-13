@@ -52,7 +52,7 @@ def check_password():
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
         font-weight: 400;
         font-size: 0.85em;
-        color: #888;
+        color: #9b9a97;
         margin-bottom: 28px;
     }
     </style>
@@ -104,13 +104,18 @@ st.markdown("""
 }
 .stApp, .stApp p, .stApp span, .stApp label, .stApp div {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif !important;
-    color: #333;
+    color: #37352f;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.01em;
+    line-height: 1.7;
 }
 
 /* === ヘッダー === */
 .app-header {
     background: #fff;
-    border-bottom: 3px solid #333;
+    border-bottom: 1px solid #e0dfdc;
     border-radius: 0;
     padding: 24px 28px;
     margin-bottom: 28px;
@@ -128,13 +133,13 @@ st.markdown("""
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif !important;
     font-weight: 400 !important;
     font-size: 1.25em !important;
-    color: #111 !important;
+    color: #37352f !important;
     margin: 0 !important;
     line-height: 1.3;
 }
 .app-header-desc {
     font-size: 0.88em;
-    color: #666;
+    color: #787774;
     line-height: 1.5;
 }
 
@@ -143,13 +148,14 @@ st.markdown("""
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
     font-weight: 400;
     font-size: 0.92em;
-    color: #111;
+    color: #37352f;
     padding: 10px 0 6px 0;
     margin-top: 20px;
-    border-bottom: 2px solid #111;
+    border-bottom: 1px solid #e0dfdc;
     display: flex;
     align-items: center;
     gap: 8px;
+    letter-spacing: 0.02em;
 }
 
 /* === アップロード === */
@@ -179,6 +185,7 @@ st.markdown("""
 .stButton > button[kind="primary"] {
     background: #111 !important;
     color: #fff !important;
+    letter-spacing: 0.04em;
     border: none !important;
     font-size: 1em !important;
 }
@@ -187,6 +194,7 @@ st.markdown("""
 .stDownloadButton > button {
     background: #0d6efd !important;
     color: #fff !important;
+    letter-spacing: 0.04em;
     border: none !important;
 }
 
@@ -200,16 +208,16 @@ st.markdown("""
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
     font-weight: 400;
     font-size: 1em;
-    color: #111;
+    color: #37352f;
     padding-bottom: 8px;
     margin-bottom: 12px;
-    border-bottom: 2px solid #111;
+    border-bottom: 1px solid #e0dfdc;
 }
 .sb-section {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
     font-weight: 400;
     font-size: 0.82em;
-    color: #666;
+    color: #787774;
     margin: 18px 0 6px 0;
     letter-spacing: 0.04em;
 }
@@ -251,11 +259,11 @@ st.markdown("""
 .info-val {
     font-weight: 400;
     font-size: 1.3em;
-    color: #111;
+    color: #37352f;
 }
 .info-lbl {
     font-size: 0.75em;
-    color: #888;
+    color: #9b9a97;
     margin-top: 2px;
 }
 
@@ -264,8 +272,8 @@ st.markdown("""
     text-align: center;
     padding: 28px 0 12px 0;
     font-size: 0.75em;
-    color: #aaa;
-    border-top: 1px solid #e0e0e0;
+    color: #b4b4b0;
+    border-top: 1px solid #e0dfdc;
     margin-top: 32px;
 }
 
