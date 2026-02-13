@@ -9,7 +9,7 @@ import pykakasi
 
 # ===== ページ設定 =====
 st.set_page_config(
-    page_title="にじいろくれよん PDF変換",
+    page_title="利用料請求書 PDF → PNG 変換",
     page_icon="🌈",
     layout="centered",
 )
@@ -28,7 +28,7 @@ def check_password():
 
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho:wght@400;700&family=Noto+Sans+JP:wght@400;600;700&display=swap');
     .stApp {
         background: #f8f9fa !important;
     }
@@ -42,14 +42,14 @@ def check_password():
         margin-bottom: 12px;
     }
     .login-name {
-        font-family: 'Noto Sans JP', sans-serif;
+        font-family: 'BIZ UDMincho', 'Noto Sans JP', serif;
         font-weight: 700;
         font-size: 1.3em;
         color: #222;
         margin-bottom: 4px;
     }
     .login-sub {
-        font-family: 'Noto Sans JP', sans-serif;
+        font-family: 'BIZ UDMincho', 'Noto Sans JP', serif;
         font-weight: 400;
         font-size: 0.85em;
         color: #888;
@@ -96,14 +96,14 @@ if not check_password():
 # =============================================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho:wght@400;700&family=Noto+Sans+JP:wght@400;600;700&display=swap');
 
 /* === 基本 === */
 .stApp {
     background: #f8f9fa !important;
 }
 .stApp, .stApp p, .stApp span, .stApp label, .stApp div {
-    font-family: 'Noto Sans JP', sans-serif !important;
+    font-family: 'BIZ UDMincho', 'Noto Sans JP', serif !important;
     color: #333;
 }
 
@@ -125,7 +125,7 @@ st.markdown("""
     font-size: 1.5em;
 }
 .app-header-top h1 {
-    font-family: 'Noto Sans JP', sans-serif !important;
+    font-family: 'BIZ UDMincho', 'Noto Sans JP', serif !important;
     font-weight: 700 !important;
     font-size: 1.25em !important;
     color: #111 !important;
@@ -140,7 +140,7 @@ st.markdown("""
 
 /* === セクション見出し === */
 .sec {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'BIZ UDMincho', 'Noto Sans JP', serif;
     font-weight: 700;
     font-size: 0.92em;
     color: #111;
@@ -165,7 +165,7 @@ st.markdown("""
 
 /* === ボタン共通 === */
 .stButton > button, .stDownloadButton > button {
-    font-family: 'Noto Sans JP', sans-serif !important;
+    font-family: 'BIZ UDMincho', 'Noto Sans JP', serif !important;
     font-weight: 600 !important;
     border-radius: 6px !important;
     padding: 10px 20px !important;
@@ -197,7 +197,7 @@ st.markdown("""
 }
 
 .sb-title {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'BIZ UDMincho', 'Noto Sans JP', serif;
     font-weight: 700;
     font-size: 1em;
     color: #111;
@@ -206,7 +206,7 @@ st.markdown("""
     border-bottom: 2px solid #111;
 }
 .sb-section {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'BIZ UDMincho', 'Noto Sans JP', serif;
     font-weight: 600;
     font-size: 0.82em;
     color: #666;
