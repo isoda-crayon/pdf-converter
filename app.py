@@ -43,7 +43,7 @@ def check_password():
     }
     .login-name {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
-        font-weight: 700;
+        font-weight: 400;
         font-size: 1.3em;
         color: #222;
         margin-bottom: 4px;
@@ -126,7 +126,7 @@ st.markdown("""
 }
 .app-header-top h1 {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif !important;
-    font-weight: 700 !important;
+    font-weight: 400 !important;
     font-size: 1.25em !important;
     color: #111 !important;
     margin: 0 !important;
@@ -141,7 +141,7 @@ st.markdown("""
 /* === セクション見出し === */
 .sec {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 0.92em;
     color: #111;
     padding: 10px 0 6px 0;
@@ -166,7 +166,7 @@ st.markdown("""
 /* === ボタン共通 === */
 .stButton > button, .stDownloadButton > button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     border-radius: 6px !important;
     padding: 10px 20px !important;
     transition: opacity 0.2s !important;
@@ -198,7 +198,7 @@ st.markdown("""
 
 .sb-title {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1em;
     color: #111;
     padding-bottom: 8px;
@@ -207,7 +207,7 @@ st.markdown("""
 }
 .sb-section {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', 'Meiryo', sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 0.82em;
     color: #666;
     margin: 18px 0 6px 0;
@@ -249,7 +249,7 @@ st.markdown("""
     text-align: center;
 }
 .info-val {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.3em;
     color: #111;
 }
